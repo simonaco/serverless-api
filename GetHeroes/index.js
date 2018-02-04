@@ -1,29 +1,25 @@
 const MongoClient = require('mongodb').MongoClient;
 const auth = require('../shared/index');
 module.exports = function(context, req) {
+  context.log('JavaScript HTTP trigger function processed a request.');
   MongoClient.connect(
     process.env.CosmosDBURL,
     { auth: auth },
     (err, database) => {
       if (err) throw err;
-      let hero = ({ id, name, saying } = req.body);
-      var db = database.db('admin');
+      const db = database.db('admin');
 
-      db.collection('Heroes').insertOne(
-        {
-          id: hero.id,
-          name: hero.name,
-          saying: hero.saying
-        },
-        (err, result) => {
+      db
+        .collection('Heroes')
+        .find()
+        .toArray((err, result) => {
           if (err) throw err;
           context.res = {
-            body: hero
+            body: result
           };
           database.close();
           context.done();
-        }
-      );
+        });
     }
   );
 };
