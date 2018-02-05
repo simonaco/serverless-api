@@ -9,14 +9,16 @@ module.exports = function(context, req) {
       if (err) throw err;
       const db = database.db('admin');
       let heroId = parseInt(req.params.id);
-      db.collection('Heroes').remove({ id: heroId }, (err, result) => {
-        if (err) throw err;
-        context.res = {
-          body: result
-        };
-        database.close();
-        context.done();
-      });
+      db
+        .collection('Heroes')
+        .findOneAndDelete({ id: heroId }, (err, result) => {
+          if (err) throw err;
+          context.res = {
+            body: result
+          };
+          database.close();
+          context.done();
+        });
     }
   );
 };
