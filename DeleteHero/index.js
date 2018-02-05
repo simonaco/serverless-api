@@ -14,7 +14,7 @@ module.exports = function(context, req) {
         .findOneAndDelete({ id: heroId }, (err, result) => {
           if (err) throw err;
           context.res = {
-            body: result
+            body: 'Hero deleted successfully!'
           };
           database.close();
           context.done();
