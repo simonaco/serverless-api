@@ -15,7 +15,7 @@ module.exports = function(context, req) {
           if (err) throw err;
           context.res = {
             status: 200,
-            body: 'Hero deleted successfully!'
+            body: { message: 'Hero deleted successfully!' }
           };
           database.close();
           context.done();
