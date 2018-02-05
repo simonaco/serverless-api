@@ -8,7 +8,7 @@ module.exports = function(context, req) {
     (err, database) => {
       if (err) throw err;
       const db = database.db('admin');
-      let heroId = parseInt(req.params.id);
+      let heroId = req.params.id;
       db
         .collection('Heroes')
         .findOneAndDelete({ id: heroId }, (err, result) => {
