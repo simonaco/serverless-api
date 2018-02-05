@@ -14,6 +14,9 @@ module.exports = function(context, req) {
         .find()
         .toArray((err, result) => {
           if (err) throw err;
+          result.forEach(hero => {
+            delete hero._id;
+          });
           context.res = {
             body: result
           };

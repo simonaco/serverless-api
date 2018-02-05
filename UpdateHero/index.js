@@ -12,14 +12,18 @@ module.exports = function(context, req) {
       let heroId = req.params.id;
       db
         .collection('Heroes')
-        .updateOne({ id: heroId }, { $set: { hero } }, (err, heroes) => {
-          if (err) throw err;
-          context.res = {
-            body: hero
-          };
-          database.close();
-          context.done();
-        });
+        .findOneAndUpdate(
+          { id: heroId },
+          { $set: { id: hero.id, name: hero.name, saying: hero.saying } },
+          (err, heroes) => {
+            if (err) throw err;
+            context.res = {
+              body: hero
+            };
+            database.close();
+            context.done();
+          }
+        );
     }
   );
 };
