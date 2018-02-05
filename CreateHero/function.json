@@ -5,7 +5,9 @@
       "authLevel": "anonymous",
       "type": "httpTrigger",
       "direction": "in",
-      "name": "req"
+      "name": "req",
+      "route": "hero",
+      "methods": ["post"]
     },
     {
       "type": "http",

@@ -6,7 +6,8 @@
       "type": "httpTrigger",
       "direction": "in",
       "name": "req",
-      "route": "heroes/{id}"
+      "route": "hero/{id}",
+      "methods": ["delete"]
     },
     {
       "type": "http",

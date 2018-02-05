@@ -9,9 +9,10 @@ module.exports = function(context, req) {
       if (err) throw err;
       const db = database.db('admin');
       let hero = ({ id, name, saying } = req.body);
+      let heroId = req.params.id;
       db
         .collection('Heroes')
-        .updateOne({ id: hero.id }, { $set: { hero } }, (err, heroes) => {
+        .updateOne({ id: heroId }, { $set: { hero } }, (err, heroes) => {
           if (err) throw err;
           context.res = {
             body: hero
